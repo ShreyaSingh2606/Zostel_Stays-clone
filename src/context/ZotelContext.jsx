@@ -16,7 +16,10 @@ export const ZotelProvider = ({ children }) => {
   // Search and Filter states
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('All');
-  const [wishlist, setWishlist] = useState([]);
+  const [wishlist, setWishlist] = useState(() => {
+  const saved = localStorage.getItem('zotel-wishlist');
+  return saved ? JSON.parse(saved) : [];
+});
   const [filteredProperties, setFilteredProperties] = useState(initialProperties);
   const [loading, setLoading] = useState(true);
 
@@ -54,11 +57,13 @@ export const ZotelProvider = ({ children }) => {
     setTheme(prev => prev === 'light' ? 'dark' : 'light');
   };
 
-  const toggleWishlist = (id) => {
-    setWishlist(prev => 
-      prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
-    );
-  };
+const toggleWishlist = (id) => {
+  setWishlist(prev => {
+    const updated = prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id];
+    localStorage.setItem('zotel-wishlist', JSON.stringify(updated));
+    return updated;
+  });
+};
 
   const login = (email) => {
     setIsLoggedIn(true);
