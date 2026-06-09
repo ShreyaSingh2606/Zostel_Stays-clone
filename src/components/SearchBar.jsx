@@ -3,7 +3,7 @@ import styles from './SearchBar.module.css';
 import { useZotel } from '../context/ZotelContext';
 
 const SearchBar = () => {
-  const [activeTab, setActiveTab] = useState('stay');
+ 
   const [localQuery, setLocalQuery] = useState('');
   const { setSearchQuery } = useZotel();
 
@@ -21,20 +21,7 @@ const SearchBar = () => {
   return (
     <div className={styles.searchWrapper}>
       <div className={`container ${styles.searchContainer}`}>
-        <div className={styles.tabs}>
-          <button 
-            className={activeTab === 'stay' ? styles.active : ''} 
-            onClick={() => setActiveTab('stay')}
-          >
-            Stay
-          </button>
-          <button 
-            className={activeTab === 'trip' ? styles.active : ''} 
-            onClick={() => setActiveTab('trip')}
-          >
-            Trip
-          </button>
-        </div>
+       
         
         <div className={styles.searchBar}>
           <div className={styles.inputGroup}>
