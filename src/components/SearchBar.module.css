@@ -112,4 +112,19 @@
     width: 100%;
     justify-content: center;
   }
+  .inputGroup input[type="date"],
+.inputGroup input[type="number"] {
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text-main);
+  background: transparent;
+  cursor: pointer;
+  width: 100%;
+}
+
+.inputGroup input[type="number"] {
+  width: 60px;
+}
 }
