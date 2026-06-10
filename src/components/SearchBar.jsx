@@ -4,7 +4,12 @@ import { useZotel } from '../context/ZotelContext';
 
 const SearchBar = () => {
  
+ 
   const [localQuery, setLocalQuery] = useState('');
+ const [checkIn, setCheckIn] = useState('');
+const [checkOut, setCheckOut] = useState('');
+const [guests, setGuests] = useState(1);
+const today = new Date().toISOString().split('T')[0];
   const { setSearchQuery } = useZotel();
 
   const handleSearch = () => {
@@ -35,15 +40,37 @@ const SearchBar = () => {
             />
           </div>
           <div className={styles.divider}></div>
-          <div className={styles.inputGroup}>
-            <label>CHECK IN - CHECK OUT</label>
-            <div className={styles.datePicker}>Select Dates</div>
-          </div>
-          <div className={styles.divider}></div>
-          <div className={styles.inputGroup}>
-            <label>GUESTS</label>
-            <div className={styles.guestPicker}>1 Guest</div>
-          </div>
+         <div className={styles.inputGroup}>
+  <label>CHECK IN</label>
+  <input
+    type="date"
+    value={checkIn}
+    min={today}
+    onChange={(e) => setCheckIn(e.target.value)}
+  />
+</div>
+<div className={styles.divider}></div>
+<div className={styles.inputGroup}>
+  <label>CHECK OUT</label>
+  <input
+    type="date"
+    value={checkOut}
+    min={checkIn || today}
+    onChange={(e) => setCheckOut(e.target.value)}
+  />
+</div>
+<div className={styles.divider}></div>
+<div className={styles.inputGroup}>
+  <label>GUESTS</label>
+  <input
+    type="number"
+    value={guests}
+    min={1}
+    max={10}
+    onChange={(e) => setGuests(e.target.value)}
+  />
+</div>
+         
           <button className={styles.searchBtn} onClick={handleSearch}>
             <span className={styles.icon}>🔍</span>
             Search
